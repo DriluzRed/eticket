@@ -12,8 +12,8 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->decimal('discount_amount', 10, 2);
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
