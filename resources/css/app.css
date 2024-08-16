@@ -1,0 +1,7 @@
+.has-error .form-control.is-invalid {
+    border-color: #dc3545;
+}
+
+.help-block {
+    color: #dc3545;
+}
