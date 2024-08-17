@@ -9,21 +9,24 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Ticket;
+use Illuminate\Mail\Mailables\Attachment;
 
 class TicketRegistrationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $ticket;
+    public $pdfPath;
     /**
      * Create a new message instance.
      *
      * @param \App\Models\Ticket $ticket
      * @return void
      */
-    public function __construct(Ticket $ticket)
+    public function __construct($ticket, $pdfPath)
     {
         $this->ticket = $ticket;
+        $this->pdfPath = $pdfPath;
     }
 
     /**
@@ -54,6 +57,8 @@ class TicketRegistrationMail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [
+            Attachment::fromStorage($this->pdfPath),
+        ];
     }
 }

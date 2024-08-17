@@ -16,6 +16,7 @@ use Endroid\QrCode\Writer\PngWriter;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf;
 class TicketController extends Controller
 {
 
@@ -83,14 +84,22 @@ class TicketController extends Controller
     
                 $ticket->save();
                 $tickets[] = $ticket;
+                $qrCodeUri = $this->generateQrCode($ticket);
                 $this->generateQrCode($ticket);
+
+                $pdf = Pdf::loadView('tickets.template', [
+                    'ticket' => $ticket,
+                    'qrCodeUri' => $qrCodeUri
+                ]);
+                $pdfPath = 'public/tickets/' . $ticket->qr_code . '.pdf';
+                Storage::put($pdfPath, $pdf->output());
             }
 
             DB::commit();
 
             
             foreach ($tickets as $ticket) {
-                Mail::to($ticket->user->email)->send(new TicketRegistrationMail($ticket));
+                Mail::to($ticket->user->email)->send(new TicketRegistrationMail($ticket, $pdfPath));
             }
 
             return redirect()->route('tickets.create')->with('success', 'Tickets registrados correctamente');
@@ -104,14 +113,15 @@ class TicketController extends Controller
     {
         $qrCode = new QrCode($ticket->qr_code);
         $writer = new PngWriter();
-
-        $filePath = 'public/qr_codes/' . $ticket->qr_code . '.png';
         $result = $writer->write($qrCode);
 
+        $filePath = 'public/qr_codes/' . $ticket->qr_code . '.png';
         Storage::put($filePath, $result->getString());
 
         $ticket->qr_path = $filePath;
         $ticket->save();
+
+        return$result->getDataUri(); // Devuelve el Data URI para la vista
     }
 
     public function downloadQrCode($id)
@@ -119,6 +129,8 @@ class TicketController extends Controller
         $ticket = Ticket::findOrFail($id);
         return Storage::download($ticket->qr_path);
     }
+
+    
 
     public function confirmTicket($id)
     {

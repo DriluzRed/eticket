@@ -12,7 +12,6 @@
     <p><strong>Evento:</strong> {{ $ticket->event->name }}</p>
     <p><strong>Tipo de entrada:</strong> {{ $ticket->ticketType->name }}</p>
     <p><strong>Codigo QR:</strong></p>
-    <img src="{{ asset('storage/qr_codes/' . $ticket->qr_code . '.png') }}" alt="QR Code">
     <p>Por favor, presenta este codigo QR en la entrada del evento.</p>
 </body>
 </html>

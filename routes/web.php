@@ -46,6 +46,9 @@ Route::group(['prefix' => 'tickets', 'middleware' => 'auth'], function () {
 
 });
 
+Route::get('/scan', [App\Http\Controllers\QrController::class, 'scan'])->name('qr.scan');
+Route::post('/check', [App\Http\Controllers\QrController::class, 'check'])->name('qr.check');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

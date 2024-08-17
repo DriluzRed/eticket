@@ -204,7 +204,7 @@ return [
         'additional_tickets.*.email' => 'correo electrónico',
         'additional_tickets.*.name' => 'nombre',
         'additional_tickets.*.ci' => 'cédula de identidad',
-        
+        'password' => 'contraseña',
     ],
 
 ];
