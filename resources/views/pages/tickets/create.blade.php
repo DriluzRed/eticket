@@ -46,7 +46,9 @@
                     <select id="ticket_type_id" name="ticket_type_id" class="form-control" required>
                         <option value="">Seleccione un tipo de entrada</option>
                         @foreach ($ticketTypes as $ticketType)
-                            <option value="{{ $ticketType->id }}" {{ old('ticket_type_id') == $ticketType->id ? 'selected' : '' }}>{{ $ticketType->name }}</option>
+                        <option value="{{ $ticketType->id }}" {{ old('ticket_type_id') == $ticketType->id ? 'selected' : '' }}>
+                            {{ $ticketType->name }} - {{ number_format($ticketType->price, 0, ',', '.')  }} Gs.
+                        </option>
                         @endforeach
                     </select>
                     @error('ticket_type_id')

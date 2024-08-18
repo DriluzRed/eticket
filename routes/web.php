@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventImageController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\TicketTypeController;
+
 
 
 Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
@@ -44,6 +46,21 @@ Route::group(['prefix' => 'tickets', 'middleware' => 'auth'], function () {
     Route::post('/{qrCode}/scan', [TicketController::class, 'scanQrCode'])->name('tickets.check');
     Route::get('/search-by-ci', [TicketController::class, 'searchByCi'])->name('search.by.ci');
 
+});
+
+Route::group(['prefix' => 'ticket_types', 'middleware' => 'auth'], function () {
+    Route::get('/', [TicketTypeController::class, 'index'])->name('ticket_types.index');
+    Route::post('/', [TicketTypeController::class, 'store'])->name('ticket_types.store');
+    Route::get('/create', [TicketTypeController::class, 'create'])->name('ticket_types.create');
+    Route::get('/{id}', [TicketTypeController::class, 'show'])->name('ticket_types.show');
+    Route::get('/{id}/edit', [TicketTypeController::class, 'edit'])->name('ticket_types.edit');
+    Route::put('/{id}', [TicketTypeController::class, 'update'])->name('ticket_types.update');
+    Route::delete('/{id}', [TicketTypeController::class, 'destroy'])->name('ticket_types.destroy');
+    
+});
+Route::group(['prefix' => 'reports', 'middleware' => 'auth'], function () {
+    Route::get('/', [App\Http\Controllers\ReportController::class, 'index'])->name('reports.index');
+    Route::post('/generate-by-event', [App\Http\Controllers\ReportController::class, 'generateByEvent'])->name('reports.generateByEvent');
 });
 
 Route::get('/scan', [App\Http\Controllers\QrController::class, 'scan'])->name('qr.scan');

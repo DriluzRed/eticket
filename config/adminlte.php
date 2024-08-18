@@ -296,7 +296,7 @@ return [
     'menu' => [
         // Sidebar items:
         
-        ['header' => 'Modules'],
+        ['header' => 'Modulos'],
         [
             'text' => 'Eventos',
             'url' => 'events/',
@@ -312,70 +312,74 @@ return [
             'active' => ['tickets/*'],
         ],
         [
+            'text' => 'Tipos de Tickets',
+            'url' => 'ticket_types/',
+            'icon' => 'fas fa-ticket',
+            'label_color' => 'success',
+            'active' => ['tickets/*'],
+        ],
+        [
             'text' => 'Escanear QR',
             'url' => 'scan/',
             'icon' => 'fa-solid fa-qrcode',
             'label_color' => 'success',
 
         ],
-        [
-            'text' => 'Usuarios/Clientes',
-            'url' => 'users/',
-            'icon' => 'fas fa-users',
-            'label_color' => 'success',
-            'active' => ['users/*'],
-        ],
-
-
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
         // [
-        //     'text' => 'multilevel',
-        //     'icon' => 'fas fa-fw fa-share',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url' => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url' => '#',
-        //             'submenu' => [
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url' => '#',
-        //                 ],
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url' => '#',
-        //                     'submenu' => [
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url' => '#',
-        //                         ],
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url' => '#',
-        //                         ],
-        //                     ],
-        //                 ],
-        //             ],
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url' => '#',
-        //         ],
-        //     ],
+        //     'text' => 'Usuarios/Clientes',
+        //     'url' => 'users/',
+        //     'icon' => 'fas fa-users',
+        //     'label_color' => 'success',
+        //     'active' => ['users/*'],
         // ],
+
+
+        // ['header' => 'account_settings'],
+        // [
+        //     'text' => 'profile',
+        //     'url' => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
+        // [
+        //     'text' => 'change_password',
+        //     'url' => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
+        [
+            'text' => 'Reportes',
+            'icon' => 'fas fa-fw fa-excel',
+            'submenu' => [
+                [
+                    'icon' => 'fas fa-fw fa-excel',
+                    'text' => 'Reporte por Evento',
+                    'url' => '/reports',
+                ],
+                // [
+                //     'text' => 'level_one',
+                //     'url' => '#',
+                //     'submenu' => [
+                //         [
+                //             'text' => 'level_two',
+                //             'url' => '#',
+                //         ],
+                //         [
+                //             'text' => 'level_two',
+                //             'url' => '#',
+                //             'submenu' => [
+                //                 [
+                //                     'text' => 'level_three',
+                //                     'url' => '#',
+                //                 ],
+                //                 [
+                //                     'text' => 'level_three',
+                //                     'url' => '#',
+                //                 ],
+                //             ],
+                //         ],
+                //     ],
+                // ],
+            ],
+        ],
         // ['header' => 'labels'],
         // [
         //     'text' => 'important',

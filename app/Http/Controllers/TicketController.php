@@ -84,21 +84,26 @@ class TicketController extends Controller
     
                 $ticket->save();
                 $tickets[] = $ticket;
+
                 $qrCodeUri = $this->generateQrCode($ticket);
                 $this->generateQrCode($ticket);
-
+                $background = public_path('img/bgticket.png');
                 $pdf = Pdf::loadView('tickets.template', [
                     'ticket' => $ticket,
-                    'qrCodeUri' => $qrCodeUri
+                    'qrCodeUri' => $qrCodeUri,
+                    'background' => $background
                 ]);
+
                 $pdfPath = 'public/tickets/' . $ticket->qr_code . '.pdf';
+
                 Storage::put($pdfPath, $pdf->output());
+
             }
 
             DB::commit();
 
-            
             foreach ($tickets as $ticket) {
+                $pdfPath = 'public/tickets/' . $ticket->qr_code . '.pdf';
                 Mail::to($ticket->user->email)->send(new TicketRegistrationMail($ticket, $pdfPath));
             }
 

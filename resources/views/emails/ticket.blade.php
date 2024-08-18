@@ -11,7 +11,7 @@
     <p><strong>Correo electronico:</strong> {{ $ticket->user->email }}</p>
     <p><strong>Evento:</strong> {{ $ticket->event->name }}</p>
     <p><strong>Tipo de entrada:</strong> {{ $ticket->ticketType->name }}</p>
-    <p><strong>Codigo QR:</strong></p>
+    <p><strong>Precio de la entrada</strong>     {{ number_format($ticket->ticketType->price, 0, ',', '.') }} Gs.</p>
     <p>Por favor, presenta este codigo QR en la entrada del evento.</p>
 </body>
 </html>
