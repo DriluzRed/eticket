@@ -21,12 +21,14 @@ class TicketTypeController extends Controller
             'name' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|numeric',
+            'is_courtesy' => 'required|boolean',
         ]);
 
         $ticketType = new TicketType();
         $ticketType->name = $request->name;
         $ticketType->description = $request->description;
         $ticketType->price = $request->price;
+        $ticketType->is_courtesy = $request->is_courtesy;
         $ticketType->save();
 
         return redirect()->route('ticket_types.index')->with('success', 'Tipo de entrada creado correctamente');
@@ -48,6 +50,7 @@ class TicketTypeController extends Controller
         $ticketType->name = $request->name;
         $ticketType->description = $request->description;
         $ticketType->price = $request->price;
+        $ticketType->is_courtesy = $request->is_courtesy;
         if($ticketType->save()){
             return redirect()->route('ticket_types.index')->with('success', 'Tipo de entrada actualizado correctamente');
         }

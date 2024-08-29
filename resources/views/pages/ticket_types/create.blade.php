@@ -66,6 +66,19 @@
                         </span>
                     @endif
                 </div>
+                <div class="form-group
+                    @if($errors->has('is_courtesy'))
+                        has-error
+                    @endif">
+                    <label for="price">Es Cortesia</label>
+                    <select name="is_courtesy" id="is_courtesy" class="form-control
+                        @if($errors->has('is_courtesy'))
+                            is-invalid
+                        @endif">
+                        <option value="0">No</option>
+                        <option value="1">Si</option>
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
         </div>

@@ -24,6 +24,7 @@
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Precio</th>
+                        <th>Es Cortesia</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -33,6 +34,13 @@
                             <td>{{ $ticket_type->name }}</td>
                             <td>{{ $ticket_type->description }}</td>
                             <td>{{ $ticket_type->price }}</td>
+                            <td>
+                                @if ($ticket_type->is_courtesy)
+                                    <span class="badge badge-success">Si</span>
+                                @else
+                                    <span class="badge badge-danger">No</span>
+                                @endif
+                            </td>
                             <td>
                                 <a href="{{ route('ticket_types.edit', $ticket_type) }}" class="btn btn-warning">Editar</a>
                             </td>

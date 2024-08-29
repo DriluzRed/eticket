@@ -65,6 +65,28 @@
                         </span>
                     @endif
                 </div>
+                <div class="form-group
+                    @if($errors->has('is_courtesy'))
+                        has-error
+                    @endif">
+                    <label for="is_courtesy">Cortesía</label>
+                    <select class="form-control
+                        @if($errors->has('is_courtesy'))
+                            is-invalid
+                        @endif" name="is_courtesy" id="is_courtesy">
+                        <option value="0" @if(old('is_courtesy', $ticket_type->is_courtesy) == 0) selected @endif>No</option>
+                        <option value="1" @if(old('is_courtesy', $ticket_type->is_courtesy) == 1) selected @endif>Sí</option>
+                    </select>
+                    @if($errors->has('is_courtesy'))
+                        <span class="help-block
+                            @if($errors->has('is_courtesy'))
+                                is-invalid
+                            @endif">
+                            {{ $errors->first('is_courtesy') }}
+                        </span>
+                    @endif
+                </div>
+                
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
         </div>

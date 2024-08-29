@@ -316,7 +316,7 @@ return [
             'url' => 'ticket_types/',
             'icon' => 'fas fa-ticket',
             'label_color' => 'success',
-            'active' => ['tickets/*'],
+            'active' => ['ticket_types/*'],
         ],
         [
             'text' => 'Escanear QR',
