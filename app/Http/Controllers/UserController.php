@@ -10,41 +10,18 @@ class UserController extends Controller
 {
     public function index()
     {
-        try {
-            $users = User::all();
-            if(!$users){
-                return response()->json(['message'=> trans('user.not_found')], 404);
-            }
-            return response()->json($users, 200);
-        } catch (\Exception $e) {
-            return response()->json(['message'=>trans('user.error')], 500);
-        }
+        $users = User::all();
+        return view('pages.users.index')->with('users', $users);
     }
 
-   
+    public function create()
+    {
+        return redirect()->route('users.index')->with('error', 'NO PUEDES CREAR USUARIOS ACTUALMENTE');
+    }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string',
-            'address' => 'nullable|string',
-            'city_id' => 'nullable|exists:cities,id',
-            'department_id' => 'nullable|exists:departments,id',
-        ]);
-    
-        $validated['password'] = bcrypt($validated['password']);
-    
-        try {
-            $user = User::create($validated);
-            return response()->json([
-                'message' => trans('user.created'),
-                'user' => $user
-            ], 201);
-        } catch (\Exception $e) {
-            return response()->json(['message' => trans('user.error')], 500);
-        }
+        return redirect()->route('users.index')->with('error', 'NO PUEDES CREAR USUARIOS ACTUALMENTE');
     }
     
     public function show($id)
@@ -57,44 +34,34 @@ class UserController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('pages.users.edit')->with('user', $user);   
+    }
+
+
     
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
+            'ci' => 'required|string',
             'name' => 'required|string',
             'email' => 'required|email',
-            'address' => 'nullable|string',
-            'city_id' => 'nullable|exists:cities,id',
-            'department_id' => 'nullable|exists:departments,id',
         ]);
 
-        try {
-            $user = User::findOrFail($id);
-            $user->update($validated);
+        $user = User::findOrFail($id);
+        $user->ci = $validated['ci'];
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->save();
 
-            return response()->json([
-                'message' => trans('user.updated'),
-                'user' => $user
-            ]);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => trans('user.not_found')], 404);
-        } catch (\Exception $e) {
-            return response()->json(['message' => trans('user.error')], 500);
-        }
+        return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente');
+        
     }
     
     public function destroy($id)
     {
-        try {
-            $user = User::findOrFail($id);
-            if (!$user->delete()) {
-                return response()->json(['message' => trans('user.error')], 500);
-            }
-            return response()->json(['message' => trans('user.deleted')]);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => trans('user.not_found')], 404);
-        } catch (\Exception $e) {
-            return response()->json(['message' => trans('user.error')], 500);
-        }
+
     }
 }

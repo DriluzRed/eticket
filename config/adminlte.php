@@ -298,6 +298,13 @@ return [
         
         ['header' => 'Modulos'],
         [
+            'text' => 'Usuarios',
+            'url' => 'users/',
+            'icon' => 'fas fa-fw fa-user',
+            'label_color' => 'success',
+            'active' => ['users/*'],
+        ],
+        [
             'text' => 'Eventos',
             'url' => 'events/',
             'icon' => 'fas fa-calendar',
