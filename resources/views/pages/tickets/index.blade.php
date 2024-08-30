@@ -27,6 +27,7 @@
                         <th>Evento</th>
                         <th>Fecha de compra</th>
                         <th>Fue utilizado</th>
+                        <th>Tipo de ticket</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -37,6 +38,7 @@
                             <td>{{ $ticket->event->name }}</td>
                             <td>{{ $ticket->purchase_date }}</td>
                             <td>{{ $ticket->confirmed ? 'Sí' : 'No' }}</td>
+                            <td>{{ $ticket->ticketType->name }}</td>
                             <td>
                                 <a href="{{ route('tickets.edit', $ticket) }}" class="btn btn-warning">Editar</a>
                                 <a href="{{ route('tickets.downloadQr', $ticket) }}" class="btn btn-info">Descargar QR</a>
