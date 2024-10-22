@@ -87,7 +87,7 @@ class TicketController extends Controller
 
                 $qrCodeUri = $this->generateQrCode($ticket);
                 $this->generateQrCode($ticket);
-                $background = public_path('img/bgticket.png');
+                $background = public_path('img/bgticket.jpeg');
                 $pdf = Pdf::loadView('tickets.template', [
                     'ticket' => $ticket,
                     'qrCodeUri' => $qrCodeUri,

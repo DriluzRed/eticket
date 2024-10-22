@@ -75,8 +75,8 @@
     <div class="pass">
         <div class="container">
             <h1 style="margin-top:50px">CHACO</h1>
-            <h1>VIBES V2</h1>
-            <h2>La historia continúa donde se inició</h2>
+            <h1>VIBES V3</h1>
+            {{-- <h2>La historia continúa donde se inició</h2> --}}
             <div class="qr-code">
                 <img src="{{ $qrCodeUri }}" alt="QR Code">
             </div>
